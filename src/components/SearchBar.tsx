@@ -21,7 +21,9 @@ type EKey = {
     key: string;
 }
 
-export const SearchBar = ({ value, onChange, sx }: SearchBarProps) => {
+export const SearchBar = (props: SearchBarProps) => {
+    const { value, onChange } = props;
+
     const [term, setTerm] = useState(value || "");
 
     const handleChange = (e: EventTag) => {
@@ -41,8 +43,8 @@ export const SearchBar = ({ value, onChange, sx }: SearchBarProps) => {
 
     return (
         <OutlinedInput
+            {...props}
             fullWidth
-            sx={sx}
             id="search"
             color="secondary"
             size="small"

@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 
 import cloneDeep from 'lodash.clonedeep';
 
@@ -8,7 +8,7 @@ import { fetchJSON } from '@/api';
 type State = {
     patient: PatientEntry | null
     loading: boolean;
-    error: any;
+    error: string | null;
     notes?: string;
 }
 
@@ -85,7 +85,7 @@ export const usePatient = () => {
         dispatch({ type: 'clear' });
     };
 
-    const getPatient = useCallback(async (patientId: string) => {
+    const getPatient = async (patientId: string) => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${serviceEndpoint}/Get`, body: { patientId } });
         if (data.error) {
@@ -94,7 +94,9 @@ export const usePatient = () => {
             return;
         }
         dispatch({ type: 'loaded', payload: data.patient });
-    }, [dispatch]);
+
+        return data.patient;
+    };
 
     const createPatient = async (patient: PatientEntry) => {
         dispatch({ type: 'init' });
@@ -129,6 +131,7 @@ export const usePatient = () => {
         }
         dispatch({ type: 'deleted', payload: { patientId } });
     };
+
     return { state, clearState, createPatient, getPatient, updatePatient, deletePatient };
 }
 

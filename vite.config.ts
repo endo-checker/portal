@@ -3,12 +3,7 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
-type Port = {
-  host: boolean;
-  port: number;
-}
-
-const port: Port = {
+const port = {
   host: true,
   port: 3000
 }
@@ -26,4 +21,3 @@ export default defineConfig({
     alias: [{ find: '@', replacement: '/src' }],
   },
 })
-

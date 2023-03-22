@@ -20,7 +20,7 @@ const RiskChip = (props: RiskChipProps): React.ReactElement => {
         <>
             {(!risk || (risk === '') || (risk === 'RISK_UNSPECIFIED'))
                 ? <Chip label={riskTypes.RISK_UNSPECIFIED.name} variant="outlined" />
-                : <Chip color={riskTypes[risk]?.color} label={riskTypes[risk].name} />
+                : <Chip color={riskTypes[risk].color} label={riskTypes[risk].name} />
             }
         </>
     )
@@ -34,5 +34,3 @@ const riskTypes: RiskType = {
 };
 
 export default RiskChip;
-
-

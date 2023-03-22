@@ -1,9 +1,9 @@
 export const palette: object = {
     primary: {
-        light: '#C69EFF',
-        main: '#814DDE',
-        dark: '#5F35AE',
-        
+        light: '#CE7AD4',
+        main: '#7249DC',
+        dark: '#842498',
+
     },
     secondary: {
         light: '#393939',
@@ -14,8 +14,7 @@ export const palette: object = {
         primary: '#212121',
     },
     background: {
-        default: '#f8f8f8',
+        default: '#FDFDFD',
         paper: '#ffffff',
-
     }
 };
