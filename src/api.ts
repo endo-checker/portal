@@ -1,7 +1,7 @@
 type Request = {
     url: string;
     body?: {
-        [key: string]: string;
+        [key: string]: string | number
     };
 };
 
@@ -19,7 +19,7 @@ export const fetchJSON = async (req: Request) => {
                     'Accept': 'application/json',
 
                 },
-                body: body ? JSON.stringify(body) : null,
+                body: JSON.stringify(body) ?? null,
             }
         );
 

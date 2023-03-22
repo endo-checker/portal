@@ -22,6 +22,10 @@ type State = {
     loading: boolean;
     total: number;
 }
+type Body = {
+    searchText: string;
+    limit?: number extends number ? number : never;
+}
 
 const setInit = (state: State) => {
     return {
@@ -48,7 +52,7 @@ export const usePatientList = () => {
         total: 0,
     });
 
-    const queryPatients = async (searchText: any, limit = 20) => {
+    const queryPatients = async (searchText: Body, limit = 20) => {
         setState(setInit(state));
 
         const url = `${serviceEndpoint}`;

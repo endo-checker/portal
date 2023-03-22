@@ -15,7 +15,7 @@ const App = (): React.ReactElement => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <CssBaseline  />
       <BrowserRouter>
         <QueryClientProvider client={client} >
           <Viewport>

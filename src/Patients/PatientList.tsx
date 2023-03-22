@@ -22,17 +22,26 @@ const Patients = (): React.ReactElement => {
         setQuery(q => ({ ...q, searchText: searchText, page: 0 }));
     };
 
-    useQuery([state, query?.searchText], () => queryPatients({ searchText: query?.searchText, limit }))
+    const getPatients = () => {
+        queryPatients({ searchText: query?.searchText, limit })
+        return state
+    }
+
+    useQuery([query], getPatients, {
+        refetchOnWindowFocus: false,
+    })
 
     return (
         <Box>
-            <SearchBar value={query.searchText} onChange={handleSearch} />
+
+            <SearchBar sx={{ my: 2 }} value={query.searchText} onChange={handleSearch} />
+
             {state.loading && Array(limit).fill("").map((_, index) =>
                 <ListSkeleton key={index} />
             )}
-            <Stack spacing={1}>
+            <Stack component={Paper} spacing={1}>
                 {state && state.patients?.map((patient: PatientEntry, index: number) =>
-                    <Paper px={2} component={Box} display="flex" justifyContent="space-between" alignItems="center" key={index}>
+                    <Box px={2} display="flex" justifyContent="space-between" alignItems="center" key={index}>
                         <Box display="flex" alignItems="center">
                             <Avatar sx={{ backgroundColor: patient.iconColor, mr: 2 }}>
                                 {patient.givenNames[0] + patient.familyName[0]}
@@ -42,13 +51,13 @@ const Patients = (): React.ReactElement => {
                             </Typography>
                         </Box>
                         <Time date={patient.createdAt} />
-                    </Paper>
+                    </Box>
                 )}
+                {state && state.total === 0 && <p>No patients found</p>}
+                <Box sx={{ mt: 2 }}>
+                    {state && `${Number(state.total)}/${state.patients?.length} of patients`}
+                </Box>
             </Stack>
-            {state && state.total === 0 && <p>No patients found</p>}
-            <Paper sx={{ mt: 2 }}>
-                {state && `${state.total}/${state.patients?.length} of patients`}
-            </Paper>
         </Box >
     )
 }
