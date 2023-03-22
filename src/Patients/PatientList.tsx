@@ -8,15 +8,16 @@ import Typography from '@mui/material/Typography';
 import { useQuery } from '@tanstack/react-query';
 
 import { ListSkeleton } from '@/components/Outline';
+import RiskChip from '@/components/RiskChip';
 import SearchBar from '@/components/SearchBar';
 import Time from '@/components/Time';
 import { usePatientList, PatientEntry } from '@/Patients/usePatientList';
 
-const limit = 20;
-
 const Patients = (): React.ReactElement => {
     const [query, setQuery] = useState({ searchText: "", page: 0 });
     const { state, queryPatients } = usePatientList();
+
+    const limit = 20;
 
     const handleSearch = (searchText: string) => {
         setQuery(q => ({ ...q, searchText: searchText, page: 0 }));
@@ -33,9 +34,7 @@ const Patients = (): React.ReactElement => {
 
     return (
         <Box>
-
             <SearchBar sx={{ my: 2 }} value={query.searchText} onChange={handleSearch} />
-
             {state.loading && Array(limit).fill("").map((_, index) =>
                 <ListSkeleton key={index} />
             )}
@@ -51,6 +50,7 @@ const Patients = (): React.ReactElement => {
                             </Typography>
                         </Box>
                         <Time date={patient.createdAt} />
+                        <RiskChip risk={patient.risk} />
                     </Box>
                 )}
                 {state && state.total === 0 && <p>No patients found</p>}

@@ -1,28 +1,22 @@
 type Request = {
     url: string;
     body?: {
-        [key: string]: string | number
+        [key: string]: string | number | object;
     };
 };
 
+// only using post requests for buf.connect
 export const fetchJSON = async (req: Request) => {
     const { url, body } = req;
     try {
-        const res = await fetch(
-            url,
-            {
-                method: "POST",
-
-                headers: {
-
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-
-                },
-                body: JSON.stringify(body) ?? null,
-            }
-        );
-
+        const res = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(body) ?? null,
+        });
         const j = await res.json();
         if (!res.ok) {
             if (j.message) {
@@ -35,4 +29,3 @@ export const fetchJSON = async (req: Request) => {
         return { error: e }
     }
 };
-

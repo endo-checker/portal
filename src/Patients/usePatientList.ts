@@ -14,6 +14,7 @@ export type PatientEntry = {
     email: string;
     createdAt: number;
     dateOfBirth: number;
+    risk: string;
 }
 
 type State = {
@@ -22,9 +23,10 @@ type State = {
     loading: boolean;
     total: number;
 }
+
 type Body = {
     searchText: string;
-    limit?: number extends number ? number : never;
+    limit?: number;
 }
 
 const setInit = (state: State) => {
