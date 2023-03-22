@@ -12,7 +12,8 @@ import { ListSkeleton } from '@/components/Outline';
 import RiskChip from '@/components/RiskChip';
 import SearchBar from '@/components/SearchBar';
 import Time from '@/components/Time';
-import { usePatientList, PatientEntry } from '@/Patients/usePatientList';
+import { usePatientList } from '@/Patients/usePatientList';
+import type { PatientEntry } from '@/types'
 
 const Patients = (): React.ReactElement => {
     const { state, queryPatients } = usePatientList();

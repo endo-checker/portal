@@ -3,19 +3,9 @@ import { useState } from 'react';
 import cloneDeep from 'lodash.clonedeep';
 
 import { fetchJSON } from '@/api';
+import type { PatientEntry } from '@/types';
 
 const serviceEndpoint = 'http://localhost:8080/patient.v1.PatientService/Query';
-
-export type PatientEntry = {
-    iconColor: string | undefined;
-    id: string;
-    givenNames: string;
-    familyName: string;
-    email: string;
-    createdAt: number;
-    dateOfBirth: number;
-    risk: string;
-}
 
 type State = {
     patients: Array<PatientEntry>;

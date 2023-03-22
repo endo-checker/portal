@@ -2,8 +2,8 @@ import React, { createContext, useContext, useReducer } from 'react';
 
 import cloneDeep from 'lodash.clonedeep';
 
-import type { PatientEntry } from './usePatientList';
 import { fetchJSON } from '@/api';
+import type { PatientEntry } from '@/types';
 
 type State = {
     patient: PatientEntry | null
