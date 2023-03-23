@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
+const SignUp = (): React.ReactElement => {
     const [error, setError] = useState<string>('');
     const [values, setValues] = useState({
         given_name: '',
@@ -23,7 +23,6 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const signUp = async () => {
-
         const resp = await fetch(`https://${import.meta.env.VITE_AUTH_DOMAIN}/dbconnections/signup`, {
             method: 'POST',
             headers: {

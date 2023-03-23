@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
-import { Avatar } from '@mui/material';
+import { Avatar, Skeleton } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -36,37 +36,42 @@ export const Header = (): React.ReactElement => {
         setAnchorEl(null);
     }
 
-
     return (
         <AppBar position='static' >
-            <Toolbar sx={{ justifyContent: "space-between" }}>
-                <Link onClick={() => navigate("/")} underline="none" sx={{ display: 'flex', '& svg': { fontSize: '2rem', mr: 1 }, alignItems: 'center', color: 'info.main', cursor: 'pointer' }} >
-                    <Logo />
-                    <Typography color="secondary">Endo Platform</Typography>
-                </Link>
-                {state.user ?
-                    <>
-                        <Button onClick={handleClick} color="inherit" endIcon={<Avatar sx={{ width: 24, height: 24 }} alt={state.user.name} src={state.user.picture} />} >
-                            {state.user.name}
-                        </Button>
-                        <Menu id="menu" anchorEl={anchorEl} open={open} onClose={handleClose}  >
-                            <MenuItem onClick={() => handleNavigate("/account")}>
-                                <ListItemIcon><PersonIcon fontSize="small" /></ListItemIcon>
-                                <Typography >Profile</Typography>
-                            </MenuItem>
-                            <MenuItem onClick={() => signOut()}>
-                                <ListItemIcon><LogoutIcon fontSize="small" /></ListItemIcon>
-                                <Typography>Logout</Typography>
-                            </MenuItem>
-                        </Menu>
-                    </>
-                    :
-                    <Box>
-                        <Button onClick={() => handleNavigate("/sign-up")} color="inherit" >Sign Up</Button>
-                        <Button onClick={() => handleNavigate('/login')} color="inherit" >Login</Button>
-                    </Box>
-                }
-            </Toolbar>
+            {state &&
+                <Toolbar sx={{ justifyContent: "space-between" }}>
+                    <Link onClick={() => navigate("/")} underline="none" sx={{ display: 'flex', '& svg': { fontSize: '2rem', mr: 1 }, alignItems: 'center', color: 'info.main', cursor: 'pointer' }} >
+                        <Logo />
+                        <Typography color="secondary">Endo Platform</Typography>
+                    </Link>
+                    {state.loading &&
+                        <Skeleton variant="text" height={40} width={200} />
+                    }
+                    {!state.loading && state.user &&
+                        <>
+                            <Button onClick={handleClick} color="inherit" endIcon={<Avatar sx={{ width: 24, height: 24 }} alt={state.user.name} src={state.user.picture} />} >
+                                {state.user.name}
+                            </Button>
+                            <Menu id="menu" anchorEl={anchorEl} open={open} onClose={handleClose}  >
+                                <MenuItem onClick={() => handleNavigate("/account")}>
+                                    <ListItemIcon><PersonIcon fontSize="small" /></ListItemIcon>
+                                    <Typography >Profile</Typography>
+                                </MenuItem>
+                                <MenuItem onClick={() => signOut()}>
+                                    <ListItemIcon><LogoutIcon fontSize="small" /></ListItemIcon>
+                                    <Typography>Logout</Typography>
+                                </MenuItem>
+                            </Menu>
+                        </>
+                    }
+                    {!state.loading && !state.user &&
+                        <Box>
+                            <Button onClick={() => handleNavigate("/sign-up")} color="inherit" >Sign Up</Button>
+                            <Button onClick={() => handleNavigate('/login')} color="inherit" >Login</Button>
+                        </Box>
+                    }
+                </Toolbar>
+            }
         </AppBar >
     )
 }

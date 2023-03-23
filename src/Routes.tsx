@@ -4,7 +4,6 @@ import { useRoutes } from 'react-router-dom';
 
 import { useUser } from '@/auth/userContext';
 
-
 const PatientEntry = lazy(() => import('@/Patients/Entry'));
 const Patients = lazy(() => import('@/Patients/PatientList'));
 const AccountInfo = lazy(() => import('@/AccountInfo'));
