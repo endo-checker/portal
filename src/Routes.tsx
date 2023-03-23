@@ -6,7 +6,10 @@ import { useRoutes } from 'react-router-dom';
 
 const PatientEntry = lazy(() => import('@/Patients/Entry'));
 const Patients = lazy(() => import('@/Patients/PatientList'));
-// const AccountInfo = lazy(() => import('@/AccountInfo'));
+const AccountInfo = lazy(() => import('@/AccountInfo'));
+const NotFound = lazy(() => import('@/NotFound'));
+const SignUp = lazy(() => import('@/auth/SignUp'));
+const SignIn = lazy(() => import('@/auth/SignIn'));
 // const Patient = lazy(() => import('@/Patients/Profile'));
 // const Create = lazy(() => import('@/Patients/Profile/Create'));
 // const NotFound = lazy(() => import('@/NotFound'));
@@ -39,8 +42,14 @@ const Routes = () => {
     // const routes = authRoutes();
     // return useRoutes(routes);
     const routes = [
+
         { path: '/', element: <Patients /> },
         { path: '/patient/:id', element: <PatientEntry /> },
+
+        { path: '*', element: <NotFound /> },
+        { path: 'account', element: <AccountInfo /> },
+        { path: 'login', element: <SignIn /> },
+        { path: 'sign-up', element: <SignUp /> }
     ]
     return useRoutes(routes);
 
