@@ -44,6 +44,7 @@ export const SearchBar = (props: SearchBarProps) => {
     return (
         <OutlinedInput
             {...props}
+            type="search"
             fullWidth
             id="search"
             color="secondary"

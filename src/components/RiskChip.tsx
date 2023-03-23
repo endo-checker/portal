@@ -9,12 +9,13 @@ type RiskChipProps = {
 type RiskType = {
     [key: string]: {
         name: string;
-        color?: string;
+        color: string;
     }
 }
 
 const RiskChip = (props: RiskChipProps): React.ReactElement => {
     const { risk } = props;
+
 
     return (
         <>
@@ -27,7 +28,7 @@ const RiskChip = (props: RiskChipProps): React.ReactElement => {
 }
 
 const riskTypes: RiskType = {
-    RISK_UNSPECIFIED: { name: 'No risk' },
+    RISK_UNSPECIFIED: { name: 'No risk', color: "default" },
     RISK_LOW: { name: 'Low risk', color: 'success' },
     RISK_MEDIUM: { name: 'Moderate risk', color: 'warning' },
     RISK_HIGH: { name: 'High risk', color: 'error' },

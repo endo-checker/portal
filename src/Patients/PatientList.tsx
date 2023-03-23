@@ -3,26 +3,35 @@ import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import CardActionArea from '@mui/material/CardActionArea';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 import { ListSkeleton } from '@/components/Outline';
 import RiskChip from '@/components/RiskChip';
 import SearchBar from '@/components/SearchBar';
 import Time from '@/components/Time';
 import { usePatientList } from '@/Patients/usePatientList';
-import type { PatientEntry } from '@/types'
+import type { PatientEntry } from '@/types';
 
 const Patients = (): React.ReactElement => {
     const { state, queryPatients } = usePatientList();
     const [query, setQuery] = useState({ searchText: "", page: 0 });
+    const navigate = useNavigate();
     const limit = 20;
 
     const handleSearch = (searchText: string) => {
         setQuery(q => ({ ...q, searchText: searchText, page: 0 }));
     };
+
+    const handleQueryType = (queryType: string) => {
+        if (queryType.includes('/\b([0-9]|10)\b /')) {
+            setQuery(q => ({ ...q, queryType: "risk", searchText: queryType, page: 0 }));
+        }
+    }
 
     const getPatients = () => {
         queryPatients({ searchText: query?.searchText, limit })
@@ -34,16 +43,18 @@ const Patients = (): React.ReactElement => {
     })
 
     return (
+
+
         <Stack spacing={1} divider={<Divider />}>
             <Stack sx={{ my: 2 }} direction="row" spacing={1}>
                 <SearchBar value={query.searchText} onChange={handleSearch} />
                 <Button sx={{ width: 150 }} variant="contained" >New patient</Button>
             </Stack>
-            {state.loading && Array(limit).fill("").map((_, index) =>
+            {state?.loading && Array(limit).fill("").map((_, index) =>
                 <ListSkeleton key={index} />
             )}
-            {state && state.patients?.map((patient: PatientEntry, index: number) =>
-                <Box px={2} display="flex" justifyContent="space-between" alignItems="center" key={index}>
+            {state?.patients?.map((patient: PatientEntry, index: number) =>
+                <Box onClick={() => navigate(`/patient/${patient.id}`)} component={CardActionArea} display="flex" justifyContent="space-between" alignItems="center" key={index}>
                     <Box display="flex" alignItems="center">
                         <Avatar sx={{ backgroundColor: patient.iconColor, mr: 2 }}>
                             {patient.givenNames[0] + patient.familyName[0]}
@@ -56,11 +67,12 @@ const Patients = (): React.ReactElement => {
                     <RiskChip risk={patient.risk} />
                 </Box>
             )}
-            {state && state.total === 0 && <p>No patients found</p>}
+            {state?.total === 0 && <Typography>No patients found</Typography>}
             <Box sx={{ mt: 2 }} display="flex" justifyContent="center">
-                {state && `${Number(state.total)}/${state.patients?.length} of patients`}
+                {state && `${state.total}/${state.patients?.length} of patients`}
             </Box>
         </Stack >
+
     )
 }
 export default Patients

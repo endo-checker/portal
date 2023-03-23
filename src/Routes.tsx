@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { lazy } from 'react';
 
 // import { useAuth0 } from '@auth0/auth0-react';
-// import { useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 
-// const CreateLog = lazy(() => import('./Logger/Createlog'));
-// const Patients = lazy(() => import('@/Patients'));
+
+const PatientEntry = lazy(() => import('@/Patients/Entry'));
+const Patients = lazy(() => import('@/Patients/PatientList'));
 // const AccountInfo = lazy(() => import('@/AccountInfo'));
 // const Patient = lazy(() => import('@/Patients/Profile'));
 // const Create = lazy(() => import('@/Patients/Profile/Create'));
 // const NotFound = lazy(() => import('@/NotFound'));
 
-const Routes = (): React.ReactElement => {
-    return (
-        <></>
-    )
+const Routes = () => {
+
     // const { user } = useAuth0();
     // const role = user.params.Role;
 
@@ -39,6 +38,12 @@ const Routes = (): React.ReactElement => {
     // };
     // const routes = authRoutes();
     // return useRoutes(routes);
+    const routes = [
+        { path: '/', element: <Patients /> },
+        { path: '/patient/:id', element: <PatientEntry /> },
+    ]
+    return useRoutes(routes);
+
 }
 
 export default Routes;

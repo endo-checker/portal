@@ -95,7 +95,7 @@ export const usePatient = () => {
         }
         dispatch({ type: 'loaded', payload: data.patient });
 
-        return data.patient;
+        // return data;
     };
 
     const createPatient = async (patient: PatientEntry) => {
