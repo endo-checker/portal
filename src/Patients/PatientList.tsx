@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -27,12 +28,6 @@ const Patients = (): React.ReactElement => {
         setQuery(q => ({ ...q, searchText: searchText, page: 0 }));
     };
 
-    const handleQueryType = (queryType: string) => {
-        if (queryType.includes('/\b([0-9]|10)\b /')) {
-            setQuery(q => ({ ...q, queryType: "risk", searchText: queryType, page: 0 }));
-        }
-    }
-
     const getPatients = () => {
         queryPatients({ searchText: query?.searchText, limit })
         return state
@@ -48,7 +43,7 @@ const Patients = (): React.ReactElement => {
         <Stack spacing={1} divider={<Divider />}>
             <Stack sx={{ my: 2 }} direction="row" spacing={1}>
                 <SearchBar value={query.searchText} onChange={handleSearch} />
-                <Button sx={{ width: 150 }} variant="contained" >New patient</Button>
+                <Button sx={{ width: 170 }} startIcon={<PersonAddIcon />} variant="contained" >New patient</Button>
             </Stack>
             {state?.loading && Array(limit).fill("").map((_, index) =>
                 <ListSkeleton key={index} />
