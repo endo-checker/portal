@@ -19,12 +19,10 @@ import Logo from '@/components/Logo';
 
 export const Header = (): React.ReactElement => {
     const navigate = useNavigate();
-    const { state } = useUser();
+    const { state, signOut } = useUser();
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-
-    // GetUser(); 
 
     const handleClick = (e: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(e.currentTarget);
@@ -38,10 +36,6 @@ export const Header = (): React.ReactElement => {
         setAnchorEl(null);
     }
 
-    const logout = async () => {
-        localStorage.clear();
-        window.location.href = '/';
-    }
 
     return (
         <AppBar position='static' >
@@ -60,7 +54,7 @@ export const Header = (): React.ReactElement => {
                                 <ListItemIcon><PersonIcon fontSize="small" /></ListItemIcon>
                                 <Typography >Profile</Typography>
                             </MenuItem>
-                            <MenuItem onClick={() => logout()}>
+                            <MenuItem onClick={() => signOut()}>
                                 <ListItemIcon><LogoutIcon fontSize="small" /></ListItemIcon>
                                 <Typography>Logout</Typography>
                             </MenuItem>

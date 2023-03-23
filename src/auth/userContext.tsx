@@ -82,19 +82,13 @@ export const useUser = () => {
         dispatch({ type: 'clear' });
     };
 
-    const token = localStorage.getItem('access_token');
-
     // returns a user object
     useQuery([state.user], async () => {
         dispatch({ type: 'init' });
-        if (!token) {
-            return;
-        }
-        const data = await fetchJSON({ url: `${api}/GetAccount`, body: { "access_token": token } });
+        const data = await fetchJSON({ url: `${api}/GetAccount`, body: {} });
         dispatch({ type: 'loaded', payload: data.userInfo });
         return data.userInfo;
     }, {
-        enabled: !!token,
         refetchOnWindowFocus: false,
         onSuccess: (data: User) => {
             console.log(data)
@@ -106,14 +100,22 @@ export const useUser = () => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${api}/SignIn`, body: { authUserSignIn: credentials } });
         if (data.accessToken) {
-            localStorage.setItem('access_token', data.accessToken);
             dispatch({ type: 'signin', payload: data });
-            window.location.href = '/';
+            window.location.href = "/";
         }
     };
 
-    return { state, clearState, signIn };
-}
+    const signOut = async () => {
+        dispatch({ type: 'init' });
+        const data = await fetchJSON({ url: `${api}/SignOut`, body: {} });
+        if (data.message) {
+            dispatch({ type: 'signin', payload: data });
+            window.location.href = "/";
+        }
+    };
+
+    return { state, clearState, signIn, signOut };
+};
 
 type Props = {
     children: React.ReactNode;
