@@ -1,8 +1,10 @@
 import React, { useReducer, createContext, useContext } from "react";
 
+import { useQuery } from '@tanstack/react-query';
 import cloneDeep from 'lodash.clonedeep';
 
 import { fetchJSON } from '@/api';
+import type { User } from '@/types';
 
 type State = {
     user: User | null;
@@ -14,9 +16,6 @@ type Action = {
     payload: any;
 }
 
-type User = {
-    [key: string]: string
-}
 
 const init: State = {
     user: null,
@@ -78,7 +77,6 @@ export const useUser = () => {
     }
 
     const { state, dispatch } = context;
-    // const [userToken, setUserToken] = React.useState();
 
     const clearState = () => {
         dispatch({ type: 'clear' });
@@ -87,31 +85,34 @@ export const useUser = () => {
     const token = localStorage.getItem('access_token');
 
     // returns a user object
-    const getUser = async () => {
+    useQuery([state.user], async () => {
         dispatch({ type: 'init' });
-
         if (!token) {
             return;
         }
         const data = await fetchJSON({ url: `${api}/GetAccount`, body: { "access_token": token } });
         dispatch({ type: 'loaded', payload: data.userInfo });
-    }
+        return data.userInfo;
+    }, {
+        enabled: !!token,
+        refetchOnWindowFocus: false,
+        onSuccess: (data: User) => {
+            console.log(data)
+            return data
+        },
+    });
 
     const signIn = async (credentials: Credentials) => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${api}/SignIn`, body: { authUserSignIn: credentials } });
         if (data.accessToken) {
-            // setUserToken(localStorage.setItem('access_token', data.accessToken));
             localStorage.setItem('access_token', data.accessToken);
             dispatch({ type: 'signin', payload: data });
-            console.log('data', data)
             window.location.href = '/';
         }
-
-        return data;
     };
 
-    return { state, getUser, clearState, signIn };
+    return { state, clearState, signIn };
 }
 
 type Props = {

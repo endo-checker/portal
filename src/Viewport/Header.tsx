@@ -12,7 +12,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { useUser } from '@/auth/userContext';
@@ -20,20 +19,12 @@ import Logo from '@/components/Logo';
 
 export const Header = (): React.ReactElement => {
     const navigate = useNavigate();
-    const { state, getUser } = useUser();
+    const { state } = useUser();
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
-    const getUserInfo = async () => {
-        await getUser()
-        return state.user
-    }
-    useQuery([state.user], getUserInfo, {
-        refetchOnWindowFocus: false,
-    })
-
-
+    // GetUser(); 
 
     const handleClick = (e: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(e.currentTarget);
@@ -51,8 +42,6 @@ export const Header = (): React.ReactElement => {
         localStorage.clear();
         window.location.href = '/';
     }
-
-    // console.log(state)
 
     return (
         <AppBar position='static' >

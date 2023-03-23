@@ -8,20 +8,12 @@ import CardHeader from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 
 import { useUser } from '@/auth/userContext';
 
 const AccountInfo = (): React.ReactElement => {
-    const { state, getUser } = useUser();
-
-    const getUserInfo = async () => {
-        await getUser()
-        return state.user
-    }
-    useQuery([state.user], getUserInfo, {
-        refetchOnWindowFocus: false,
-    })
+    const { state } = useUser();
 
     return (
         <Stack spacing={2}>

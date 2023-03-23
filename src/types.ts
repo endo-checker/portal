@@ -8,3 +8,7 @@ export type PatientEntry = {
     dateOfBirth: number;
     risk: string;
 }
+
+export type User = {
+    [key: string]: string | number | undefined;
+}
