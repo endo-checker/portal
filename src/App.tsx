@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles'
-import { QueryClientProvider, QueryClient, useQuery } from '@tanstack/react-query';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 
 import AuthProvider from '@/auth/userContext';

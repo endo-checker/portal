@@ -7,7 +7,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 import { useUser } from "@/auth/userContext";
 
-const SignIn = () => {
+const SignIn = (): React.ReactElement => {
     const { signIn } = useUser();
     const [error, setError] = useState<string>("");
     const [credentials, setCredentials] = useState({
@@ -26,10 +26,6 @@ const SignIn = () => {
         setError("");
     }
 
-    const onSubmit = async () => {
-        signIn(credentials)
-    }
-
     return (
         <Dialog open={true} maxWidth="md">
             {error}
@@ -41,7 +37,7 @@ const SignIn = () => {
                     <TextField type="password" fullWidth name="password" label="Password" onChange={onChange} />
                 </Grid>
                 <Grid xs={12}>
-                    <Button onClick={onSubmit} variant="contained">Sign In</Button>
+                    <Button onClick={() => signIn(credentials)} variant="contained">Sign In</Button>
                 </Grid>
             </Grid>
         </Dialog>
