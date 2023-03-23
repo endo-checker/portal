@@ -16,7 +16,6 @@ type Action = {
     payload: any;
 }
 
-
 const init: State = {
     user: null,
     loading: false,
@@ -31,7 +30,6 @@ const api = 'http://localhost:8084/auth.v1.AuthService'
 const authContext: React.Context<any> = createContext(init);
 
 const reducer = (state: State, action: Action) => {
-
     switch (action.type) {
         case 'init':
             return {
@@ -53,7 +51,13 @@ const reducer = (state: State, action: Action) => {
                 loading: false,
                 error: null,
             }
-
+        case 'signout':
+            return {
+                ...state,
+                user: null,
+                loading: false,
+                error: null,
+            }
         case 'error':
             return {
                 ...state,
@@ -86,9 +90,10 @@ export const useUser = () => {
     useQuery([state.user], async () => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${api}/GetAccount`, body: {} });
-        dispatch({ type: 'loaded', payload: data.userInfo });
+        dispatch({ type: 'loaded', payload: data.userInfo })
         return data.userInfo;
     }, {
+        enabled: state.user === null,
         refetchOnWindowFocus: false,
         onSuccess: (data: User) => {
             console.log(data)
@@ -109,7 +114,7 @@ export const useUser = () => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${api}/SignOut`, body: {} });
         if (data.message) {
-            dispatch({ type: 'signin', payload: data });
+            dispatch({ type: 'signout', payload: data });
             window.location.href = "/";
         }
     };
@@ -117,11 +122,11 @@ export const useUser = () => {
     return { state, clearState, signIn, signOut };
 };
 
-type Props = {
+type AuthProviderProps = {
     children: React.ReactNode;
 }
 
-const AuthProvider = (props: Props) => {
+const AuthProvider = (props: AuthProviderProps) => {
     const { children } = props;
     const [state, dispatch] = useReducer(reducer, init);
 
