@@ -51,6 +51,13 @@ const reducer = (state: State, action: Action) => {
                 loading: false,
                 error: null,
             }
+        case 'signup':
+            return {
+                ...state,
+                user: cloneDeep(action.payload),
+                loading: false,
+                error: null,
+            }
         case 'signout':
             return {
                 ...state,
@@ -101,6 +108,15 @@ export const useUser = () => {
         },
     });
 
+    const signUp = async (credentials: any) => {
+        dispatch({ type: 'init' });
+        const data = await fetchJSON({ url: `${api}/SignUp`, body: { authUserSignUp: credentials } });
+        if (data.accessToken) {
+            dispatch({ type: 'signup', payload: data });
+            window.location.href = "/";
+        }
+    }
+
     const signIn = async (credentials: Credentials) => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${api}/SignIn`, body: { authUserSignIn: credentials } });
@@ -119,7 +135,7 @@ export const useUser = () => {
         }
     };
 
-    return { state, clearState, signIn, signOut };
+    return { state, clearState, signUp, signIn, signOut };
 };
 
 type AuthProviderProps = {

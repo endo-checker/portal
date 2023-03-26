@@ -10,11 +10,13 @@ const AccountInfo = lazy(() => import('@/AccountInfo'));
 const NotFound = lazy(() => import('@/NotFound'));
 const SignUp = lazy(() => import('@/auth/SignUp'));
 const SignIn = lazy(() => import('@/auth/SignIn'));
+const DefaultView = lazy(() => import('@/DefaultView'));
 
 const Routes = () => {
     const { state } = useUser();
 
     const loggedOutRoutes = [
+        { path: '/', element: <DefaultView /> },
         { path: 'login', element: <SignIn /> },
         { path: 'sign-up', element: <SignUp /> },
         { path: '*', element: <NotFound /> },
