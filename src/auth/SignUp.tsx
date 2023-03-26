@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 
+import { useUser } from '@/auth/userContext';
 import Logo from "@/components/Logo";
 
 const SignUp = (): React.ReactElement => {
@@ -17,36 +18,19 @@ const SignUp = (): React.ReactElement => {
         family_name: '',
         email: '',
         nickname: '',
-        password: '',
-        'client_id': import.meta.env.VITE_AUTH_CLIENT_ID,
-        'connection': 'Username-Password-Authentication',
+        password: ''
     });
 
     const navigate = useNavigate();
 
-    const signUp = async () => {
-        const resp = await fetch(`https://${import.meta.env.VITE_AUTH_DOMAIN}/dbconnections/signup`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values)
-        })
-        const data = await resp.json();
+    const { signUp } = useUser();
 
-        if (resp.ok) {
-            navigate("/")
-        }
-        else {
-            if (data.description) {
-                setError(data.description)
-            }
-            if (data.message) {
-                setError(data.message)
-            }
-            if (data.error) {
-                setError(data.error)
-            }
+    const handleSubmit = async () => {
+        try {
+            await signUp(values);
+            
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -61,7 +45,7 @@ const SignUp = (): React.ReactElement => {
                 <TextField size="small" label="Username" fullWidth type="text" name="nickname" onChange={(e) => setValues({ ...values, nickname: e.target.value })} />
                 <TextField size="small" label="Email" fullWidth type="text" name="email" onChange={(e) => setValues({ ...values, email: e.target.value })} />
                 <TextField size="small" label="Password" fullWidth type="password" name="password" onChange={(e) => setValues({ ...values, password: e.target.value })} />
-                <LoadingButton fullWidth variant="contained" onClick={() => signUp()} >Sign Up</LoadingButton>
+                <LoadingButton fullWidth variant="contained" onClick={handleSubmit} >Sign Up</LoadingButton>
             </Stack>
         </Dialog >
     )

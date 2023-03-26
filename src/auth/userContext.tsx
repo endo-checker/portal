@@ -110,8 +110,9 @@ export const useUser = () => {
 
     const signUp = async (credentials: any) => {
         dispatch({ type: 'init' });
-        const data = await fetchJSON({ url: `${api}/SignUp`, body: { authUserSignUp: credentials } });
-        if (data.accessToken) {
+        const data = await fetchJSON({ url: `${api}/CreateAccount`, body: { registerAuthUser: credentials } });
+        console.log(data)
+        if (data.registerAuthUser.email) {
             dispatch({ type: 'signup', payload: data });
             window.location.href = "/";
         }
