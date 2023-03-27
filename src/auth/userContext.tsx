@@ -9,6 +9,7 @@ import type { User } from '@/types';
 type State = {
     user: User | null;
     loading: boolean;
+    error: string | null;
 }
 
 type Action = {
@@ -19,17 +20,17 @@ type Action = {
 const init: State = {
     user: null,
     loading: false,
+    error: null,
 };
 
 type Credentials = {
-    username: string;
-    password: string;
+    [key: string]: string;
 }
 
 const api = 'http://localhost:8084/auth.v1.AuthService'
 const authContext: React.Context<any> = createContext(init);
 
-const reducer = (state: State, action: Action) => {
+const reducer = (state: State, action: Action): State => {
     switch (action.type) {
         case 'init':
             return {
@@ -108,7 +109,7 @@ export const useUser = () => {
         },
     });
 
-    const signUp = async (credentials: any) => {
+    const signUp = async (credentials: Credentials) => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${api}/CreateAccount`, body: { registerAuthUser: credentials } });
         console.log(data)

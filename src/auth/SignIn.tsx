@@ -2,15 +2,19 @@ import React, { useState } from "react";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
+import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 import { useUser } from "@/auth/userContext";
 import Logo from "@/components/Logo";
 
 const SignIn = (): React.ReactElement => {
     const { signIn } = useUser();
+    const navigate = useNavigate();
+
     const [credentials, setCredentials] = useState({
         username: "",
         password: "",
@@ -35,6 +39,11 @@ const SignIn = (): React.ReactElement => {
                 <TextField fullWidth label="Email" name="username" onChange={onChange} />
                 <TextField type="password" fullWidth name="password" label="Password" onChange={onChange} />
                 <Button size="large" fullWidth onClick={() => signIn(credentials)} variant="contained">Sign In</Button>
+                <Divider sx={{ width: '100%' }} />
+                <Stack direction="row" alignItems="center" spacing={1} >
+                    <Typography align="center" color="grayText" >{"Don't have an account? "}</Typography>
+                    <Button onClick={() => navigate("/sign-up")} color="primary" >Sign Up</Button>
+                </Stack>
             </Stack>
         </Dialog>
     )
