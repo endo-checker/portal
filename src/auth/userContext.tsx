@@ -104,7 +104,6 @@ export const useUser = () => {
         enabled: state.user === null,
         refetchOnWindowFocus: false,
         onSuccess: (data: User) => {
-            console.log(data)
             return data
         },
     });
@@ -112,7 +111,6 @@ export const useUser = () => {
     const signUp = async (credentials: Credentials) => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${api}/CreateAccount`, body: { registerAuthUser: credentials } });
-        console.log(data)
         if (data.registerAuthUser.email) {
             dispatch({ type: 'signup', payload: data });
             window.location.href = "/";

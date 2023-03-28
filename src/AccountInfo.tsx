@@ -21,7 +21,7 @@ const AccountInfo = (): React.ReactElement => {
                 <Card>
                     <CardHeader
                         avatar={<Avatar src={state.user.picture} alt={`${state.user.nickname}'s avatar`} />}
-                        title={state.user.nickname}
+                        title={`${state.user.givenName} ${state.user.familyName}`}
                     />
                     <CardContent>
                         <Stack divider={<Divider />}>
@@ -30,8 +30,8 @@ const AccountInfo = (): React.ReactElement => {
                                 <Typography>{state.user.email}</Typography>
                             </Box>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
-                                <Typography>Name:</Typography>
-                                <Typography>{`${state.user.given_name} ${state.user.family_name}`}</Typography>
+                                <Typography>Username:</Typography>
+                                <Typography>{state.user.nickname}</Typography>
                             </Box>
                         </Stack>
                     </CardContent>

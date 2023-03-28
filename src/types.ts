@@ -1,5 +1,5 @@
 export type PatientEntry = {
-    iconColor: string | undefined;
+    iconColor: string;
     id: string;
     givenNames: string;
     familyName: string;

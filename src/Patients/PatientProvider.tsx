@@ -7,7 +7,7 @@ import { fetchJSON } from '@/api';
 import type { PatientEntry } from '@/types';
 
 type State = {
-    patient: PatientEntry | null
+    patient: PatientEntry | null;
     loading: boolean;
     error: string | null;
     notes?: string;
@@ -21,8 +21,7 @@ type Action = {
 const initialState = {
     patient: null,
     loading: false,
-    error: null,
-
+    error: null
 };
 
 const serviceEndpoint = 'http://localhost:8080/patient.v1.PatientService';
@@ -86,7 +85,7 @@ export const usePatient = () => {
         dispatch({ type: 'clear' });
     };
 
-    const getPatient = async (patientId: string) => {
+    const getPatient = async (patientId: string): Promise<void> => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${serviceEndpoint}/Get`, body: { patientId } });
         if (data.error) {
@@ -95,11 +94,9 @@ export const usePatient = () => {
             return;
         }
         dispatch({ type: 'loaded', payload: data.patient });
-
-        // return data;
     };
 
-    const createPatient = async (patient: PatientEntry) => {
+    const createPatient = async (patient: PatientEntry): Promise<void> => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${serviceEndpoint}/Create`, body: { patient } });
         if (data.error) {
@@ -110,7 +107,7 @@ export const usePatient = () => {
         dispatch({ type: 'created', payload: data.patient });
     };
 
-    const updatePatient = async (patient: PatientEntry) => {
+    const updatePatient = async (patient: PatientEntry): Promise<void> => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${serviceEndpoint}/Update`, body: { patient, patientId: patient.id } });
         if (data.error) {
@@ -121,7 +118,7 @@ export const usePatient = () => {
         dispatch({ type: 'updated', payload: { patient: data.patient } });
     };
 
-    const deletePatient = async (patientId: string) => {
+    const deletePatient = async (patientId: string): Promise<void> => {
         dispatch({ type: 'init' });
 
         const data = await fetchJSON({ url: `${serviceEndpoint}/Delete`, body: { patientId } });

@@ -21,23 +21,30 @@ const SignUp = (): React.ReactElement => {
     const navigate = useNavigate();
 
     const [values, setValues] = useState<Values>({
-        given_name: '',
-        family_name: '',
+        givenName: '',
+        familyName: '',
         email: '',
         nickname: '',
         password: ''
     });
 
+    const onEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === 'Enter' && { ...values }) {
+            signUp(values);
+        }
+    }
+
     return (
+   
         <Dialog maxWidth="md" open={true}  >
             <Stack sx={{ p: 2, width: 350 }} spacing={2} direction="column" alignItems="center">
                 <Logo sx={{ height: 100, width: 'auto' }} />
                 <Typography variant="h3">Sign Up</Typography>
-                <TextField size="small" label="Given Names" fullWidth type="text" name="givenName" onChange={(e) => setValues({ ...values, given_name: e.target.value })} />
-                <TextField size="small" label="Family Name" fullWidth type="text" name="familyName" onChange={(e) => setValues({ ...values, family_name: e.target.value })} />
-                <TextField size="small" label="Username" fullWidth type="text" name="nickname" onChange={(e) => setValues({ ...values, nickname: e.target.value })} />
-                <TextField size="small" label="Email" fullWidth type="text" name="email" onChange={(e) => setValues({ ...values, email: e.target.value })} />
-                <TextField size="small" label="Password" fullWidth type="password" name="password" onChange={(e) => setValues({ ...values, password: e.target.value })} />
+                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Given Names" fullWidth type="text" name="givenName" onChange={(e) => setValues({ ...values, given_name: e.target.value })} />
+                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Family Name" fullWidth type="text" name="familyName" onChange={(e) => setValues({ ...values, family_name: e.target.value })} />
+                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Username" fullWidth type="text" name="nickname" onChange={(e) => setValues({ ...values, nickname: e.target.value })} />
+                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Email" fullWidth type="text" name="email" onChange={(e) => setValues({ ...values, email: e.target.value })} />
+                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Password" fullWidth type="password" name="password" onChange={(e) => setValues({ ...values, password: e.target.value })} />
                 <LoadingButton fullWidth variant="contained" onClick={() => signUp(values)} >Sign Up</LoadingButton>
                 <Divider sx={{ width: '100%' }} />
                 <Stack direction="row" alignItems="center" spacing={1} >
@@ -47,7 +54,6 @@ const SignUp = (): React.ReactElement => {
             </Stack>
         </Dialog >
     )
-
 }
 
 export default SignUp;
