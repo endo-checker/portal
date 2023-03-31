@@ -17,9 +17,6 @@ type EventTag = {
         value: string;
     }
 }
-type EKey = {
-    key: string;
-}
 
 const SearchBar = (props: SearchBarProps): React.ReactElement => {
     const { value, onChange } = props;
@@ -30,7 +27,8 @@ const SearchBar = (props: SearchBarProps): React.ReactElement => {
         setTerm(e.target.value);
     };
 
-    const handleKeyDown = (e: EKey) => {
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement | HTMLDivElement>) => {
         if (e.key === 'Enter') {
             onChange(term);
         }
@@ -51,7 +49,7 @@ const SearchBar = (props: SearchBarProps): React.ReactElement => {
             size="small"
             value={term}
             onChange={handleChange}
-            onKeyDown={handleKeyDown}
+            onKeyDown={(e) => handleKeyDown(e)}
             placeholder="Search..."
             startAdornment={
                 <InputAdornment position="start">

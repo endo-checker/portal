@@ -10,7 +10,7 @@ const Time = ({ date }: DateType): React.ReactElement => {
     const dateParser = new Date(date * 1000);
 
     return (
-        <>{timeFunc(now as unknown as number - Date.parse(dateParser as unknown as string))}</>
+        <>{timeFunc((now as unknown as number) - Date.parse(dateParser as unknown as string))}</>
     )
 }
 
