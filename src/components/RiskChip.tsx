@@ -9,7 +9,7 @@ type RiskChipProps = {
 type RiskType = {
     [key: string]: {
         name: string;
-        color: string;
+        color: "default" | "primary" | "secondary" | "success" | "error" | "warning" | "info" | undefined;
     }
 }
 

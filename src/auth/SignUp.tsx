@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import BrokenImageOutlinedIcon from '@mui/icons-material/BrokenImageOutlined';
-import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
@@ -48,7 +46,7 @@ const SignUp = (): React.ReactElement => {
         <Paper sx={{ p: 2 }}>
             <Grid container spacing={2} alignItems="center">
                 <Grid xs={12}>
-                    <Stack alignItems="center" direction="column">
+                    <Stack spacing={2} alignItems="center" direction="column">
                         <Logo sx={{ height: 100, width: 'auto' }} />
                         <Typography variant="h3">Sign Up</Typography>
                     </Stack>

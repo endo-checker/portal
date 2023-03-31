@@ -21,7 +21,7 @@ type EKey = {
     key: string;
 }
 
-export const SearchBar = (props: SearchBarProps) => {
+const SearchBar = (props: SearchBarProps): React.ReactElement => {
     const { value, onChange } = props;
 
     const [term, setTerm] = useState(value || "");

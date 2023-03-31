@@ -4,7 +4,14 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
-const FileUpload = (props: any): React.ReactElement => {
+type FileUploadProps = {
+    accept?: string;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    title?: string;
+    variant?: 'text' | 'outlined' | 'contained';
+}
+
+const FileUpload = (props: FileUploadProps): React.ReactElement => {
     const { accept, onChange, title, variant } = props;
 
     return (
