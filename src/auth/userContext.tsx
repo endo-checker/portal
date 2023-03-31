@@ -2,6 +2,7 @@ import React, { useReducer, createContext, useContext } from "react";
 
 import { useQuery } from '@tanstack/react-query';
 import cloneDeep from 'lodash.clonedeep';
+import { useNavigate } from 'react-router-dom';
 
 import { fetchJSON } from '@/api';
 import type { User } from '@/types';
@@ -79,10 +80,10 @@ const reducer = (state: State, action: Action): State => {
         default:
             throw new Error(`unsuported action type dispatched to AuthProvider reducer: ${action.type}`);
     }
-
 }
 
 export const useUser = () => {
+    const navigate = useNavigate();
     const context = useContext(authContext);
     if (!context) {
         throw new Error('useUser must be used within an AuthProvider');
@@ -101,7 +102,7 @@ export const useUser = () => {
         dispatch({ type: 'loaded', payload: data.userInfo })
         return data.userInfo;
     }, {
-        enabled: state.user === null,
+        // enabled: state.user === null,
         refetchOnWindowFocus: false,
         onSuccess: (data: User) => {
             return data
@@ -111,9 +112,12 @@ export const useUser = () => {
     const signUp = async (credentials: Credentials) => {
         dispatch({ type: 'init' });
         const data = await fetchJSON({ url: `${api}/CreateAccount`, body: { registerAuthUser: credentials } });
-        if (data.registerAuthUser.email) {
+        console.log(data)
+        if (data.id) {
             dispatch({ type: 'signup', payload: data });
-            window.location.href = "/";
+            navigate(`/success/${data.id}`, { state: { id: data.id } });
+
+
         }
     }
 

@@ -11,6 +11,7 @@ const NotFound = lazy(() => import('@/NotFound'));
 const SignUp = lazy(() => import('@/auth/SignUp'));
 const SignIn = lazy(() => import('@/auth/SignIn'));
 const DefaultView = lazy(() => import('@/DefaultView'));
+const SignUpSuccess = lazy(() => import('@/auth/SignUpSuccess'));
 
 const Routes = () => {
     const { state } = useUser();
@@ -20,6 +21,7 @@ const Routes = () => {
         { path: 'login', element: <SignIn /> },
         { path: 'sign-up', element: <SignUp /> },
         { path: '*', element: <NotFound /> },
+        { path: '/success/:successId', element: <SignUpSuccess /> }
     ]
     const routes = [
         { path: '/', element: <Patients /> },

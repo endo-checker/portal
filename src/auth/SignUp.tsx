@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
-import LoadingButton from '@mui/lab/LoadingButton';
+import BrokenImageOutlinedIcon from '@mui/icons-material/BrokenImageOutlined';
+import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
-import Dialog from '@mui/material/Dialog';
 import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
 import Stack from "@mui/material/Stack";
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
 import { useNavigate } from "react-router-dom";
 
 import { useUser } from '@/auth/userContext';
@@ -34,25 +36,53 @@ const SignUp = (): React.ReactElement => {
         }
     }
 
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setValues({
+            ...values,
+            [name]: value
+        })
+    }
+
     return (
-   
-        <Dialog maxWidth="md" open={true}  >
-            <Stack sx={{ p: 2, width: 350 }} spacing={2} direction="column" alignItems="center">
-                <Logo sx={{ height: 100, width: 'auto' }} />
-                <Typography variant="h3">Sign Up</Typography>
-                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Given Names" fullWidth type="text" name="givenName" onChange={(e) => setValues({ ...values, given_name: e.target.value })} />
-                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Family Name" fullWidth type="text" name="familyName" onChange={(e) => setValues({ ...values, family_name: e.target.value })} />
-                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Username" fullWidth type="text" name="nickname" onChange={(e) => setValues({ ...values, nickname: e.target.value })} />
-                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Email" fullWidth type="text" name="email" onChange={(e) => setValues({ ...values, email: e.target.value })} />
-                <TextField onKeyDown={(e) => onEnter(e)} size="small" label="Password" fullWidth type="password" name="password" onChange={(e) => setValues({ ...values, password: e.target.value })} />
-                <LoadingButton fullWidth variant="contained" onClick={() => signUp(values)} >Sign Up</LoadingButton>
-                <Divider sx={{ width: '100%' }} />
-                <Stack direction="row" alignItems="center" spacing={1} >
-                    <Typography align="center" color="grayText" >{"Already have an account? "}</Typography>
-                    <Button onClick={() => navigate("/login")} color="primary" >Sign in</Button>
-                </Stack>
-            </Stack>
-        </Dialog >
+        <Paper sx={{ p: 2 }}>
+            <Grid container spacing={2} alignItems="center">
+                <Grid xs={12}>
+                    <Stack alignItems="center" direction="column">
+                        <Logo sx={{ height: 100, width: 'auto' }} />
+                        <Typography variant="h3">Sign Up</Typography>
+                    </Stack>
+                </Grid>
+                <Grid xs={6}>
+                    <TextField onKeyDown={(e) => onEnter(e)} label="Given Names" fullWidth type="text" name="givenName" onChange={onChange} />
+                </Grid>
+                <Grid xs={6}>
+                    <TextField onKeyDown={(e) => onEnter(e)} label="Family Name" fullWidth type="text" name="familyName" onChange={onChange} />
+                </Grid>
+                <Grid xs={12}>
+                    <TextField onKeyDown={(e) => onEnter(e)} label="Username" fullWidth type="text" name="nickname" onChange={onChange} />
+                </Grid>
+                <Grid xs={12}>
+                    <TextField onKeyDown={(e) => onEnter(e)} label="Email" fullWidth type="text" name="email" onChange={onChange} />
+                </Grid>
+                <Grid xs={12}>
+                    <TextField onKeyDown={(e) => onEnter(e)} label="Password" fullWidth type="password" name="password" onChange={onChange} />
+                </Grid>
+
+                <Grid xs={12}>
+                    <Button size="large" fullWidth variant="contained" onClick={() => signUp(values)} >Create Account</Button>
+                </Grid>
+                <Grid xs={12}>
+                    <Divider sx={{ width: '100%' }} />
+                </Grid>
+                <Grid xs={12}>
+                    <Stack alignItems="center" direction="row">
+                        <Typography align="center" color="grayText" >{"Already have an account? "}</Typography>
+                        <Button onClick={() => navigate("/login")} color="primary" >Sign in</Button>
+                    </Stack>
+                </Grid>
+            </Grid>
+        </Paper >
     )
 }
 

@@ -42,7 +42,7 @@ export const Header = (): React.ReactElement => {
                 <Toolbar sx={{ justifyContent: "space-between" }}>
                     <Link onClick={() => navigate("/")} underline="none" sx={{ display: 'flex', '& svg': { fontSize: '2rem', mr: 1 }, alignItems: 'center', color: 'info.main', cursor: 'pointer' }} >
                         <Logo />
-                        <Typography color="secondary">Endo Platform</Typography>
+                        <Typography color="secondary" >Endo Platform</Typography>
                     </Link>
                     {state.loading &&
                         <Skeleton variant="text" height={40} width={200} />
