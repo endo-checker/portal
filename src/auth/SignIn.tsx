@@ -38,7 +38,6 @@ const SignIn = (): React.ReactElement => {
         }
     }
 
-
     return (
         <Dialog open={true} maxWidth="sm" >
             <Stack sx={{ p: 2, width: 350 }} spacing={2} direction="column" alignItems="center">

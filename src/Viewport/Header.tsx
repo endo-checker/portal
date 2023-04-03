@@ -50,7 +50,7 @@ export const Header = (): React.ReactElement => {
                     {!state.loading && state.user &&
                         <>
                             <Button onClick={handleClick} color="inherit" endIcon={<Avatar sx={{ width: 24, height: 24 }} alt={state.user.name} src={state.user.picture} />} >
-                                {state.user.name}
+                                {state.user.nickname}
                             </Button>
                             <Menu id="menu" anchorEl={anchorEl} open={open} onClose={handleClose}  >
                                 <MenuItem onClick={() => handleNavigate("/account")}>

@@ -12,8 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from '@/auth/userContext';
 import Logo from "@/components/Logo";
 
+type Vals = 'givenName' | 'familyName' | 'email' | 'nickname' | 'password';
 type Values = {
-    [key: string]: string;
+    [key in Vals]: string;
 }
 
 const SignUp = (): React.ReactElement => {

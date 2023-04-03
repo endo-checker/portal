@@ -1,0 +1,12 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deployment:
+    uses: endo-checker/build/.github/workflows/static-web-app-deploy.yaml@main
+    secrets: inherit

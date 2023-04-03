@@ -115,9 +115,7 @@ export const useUser = () => {
         console.log(data)
         if (data.id) {
             dispatch({ type: 'signup', payload: data });
-            navigate(`/success/${data.id}`, { state: { id: data.id } });
-
-
+            navigate(`/success/${data.id}`, { state: { id: data.id } })
         }
     }
 
