@@ -15,6 +15,7 @@ export const fetchJSON = async (req: Request) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
+            mode: 'cors',
             body: JSON.stringify(body) ?? null,
         });
         const j = await res.json();
