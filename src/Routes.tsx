@@ -35,7 +35,7 @@ const Routes: React.FC = (): React.ReactElement | null => {
         { path: 'account', element: <AccountInfo /> }
     ]
     const authRoutes = (): RouteTypes => {
-        if (!state.user) {
+        if (!state.user && !state.loading) {
             return loggedOutRoutes
         }
         return routes;

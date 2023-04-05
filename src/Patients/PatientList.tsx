@@ -26,6 +26,7 @@ const Patients = (): React.ReactElement => {
 
     const handleSearch = (searchText: string) => {
         setQuery(q => ({ ...q, searchText: searchText, page: 0 }));
+        return searchText
     };
 
     const getPatients = () => {
@@ -38,8 +39,6 @@ const Patients = (): React.ReactElement => {
     })
 
     return (
-
-
         <Stack spacing={1} divider={<Divider />}>
             <Stack sx={{ my: 2 }} direction="row" spacing={1}>
                 <SearchBar value={query.searchText} onChange={handleSearch} />

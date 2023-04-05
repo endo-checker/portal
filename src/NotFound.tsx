@@ -16,8 +16,8 @@ const NotFound = (): React.ReactElement => {
             <Stack sx={{ p: 2 }} alignItems="center" spacing={2} component={Paper}>
                 <ErrorIcon color="error" sx={{ fontSize: 75 }} />
                 <Typography variant="h1">404</Typography>
-                <Typography >{`The page you are looking for does not exist or can't be found`}</Typography>
-                <Button variant="contained" onClick={() => navigate("/")}>Return home</Button>
+                <Typography color="error" sx={{ fontWeight: 'bold' }}>{`The page you are looking for does not exist or can't be found`}</Typography>
+                <Button size="large" variant="contained" color="error" onClick={() => navigate("/")}>Return home</Button>
             </Stack>
         </Container>
     )
