@@ -5,7 +5,7 @@ type DateType = {
 }
 
 // converts epoch to 'time ago' format
-const Time = ({ date }: DateType): React.ReactElement => {
+const Time = ({ date }: DateType): JSX.Element => {
     const now = new Date();
     const elapsedTime = now.getTime() - date * 1000;
 

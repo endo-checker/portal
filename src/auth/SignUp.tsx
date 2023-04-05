@@ -18,7 +18,7 @@ type Values = {
     [key in Vals]: string;
 }
 
-const SignUp = (): React.ReactElement => {
+const SignUp = (): JSX.Element => {
     const { signUp } = useUser();
     const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const SignUp = (): React.ReactElement => {
         password: ''
     });
 
-    const undefinedVals = Object.values(values).filter(val => val === '');
+    const undefinedVals: Array<string> = Object.values(values).filter(val => val === '');
     const disable = (): boolean => undefinedVals.length > 0;
 
     const onEnter = (e: React.KeyboardEvent<HTMLDivElement>): void => {
@@ -44,7 +44,7 @@ const SignUp = (): React.ReactElement => {
         }
     }
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
         setValues({
             ...values,

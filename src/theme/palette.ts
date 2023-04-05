@@ -1,3 +1,5 @@
+import type { PaletteOptions } from "@mui/material";
+
 const PURPLE = '#6B46C1';
 const RED = '#f44336';
 const ORANGE = '#FFC107';
@@ -9,7 +11,7 @@ const DARK_GRAY = '#333333';
 const LIGHTER_GRAY = '#707070';
 const SOFT_PINK = '#F48FB1';
 
-export const palette: object = {
+export const palette: PaletteOptions = {
     primary: {
         main: PURPLE,
         dark: '#4c2a92',

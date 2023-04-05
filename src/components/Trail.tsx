@@ -11,7 +11,7 @@ type TrailProps = {
 }
 
 // Creates a trail of breadcrumbs for the current page
-export const Trail = (props: TrailProps): React.ReactElement => {
+export const Trail = (props: TrailProps): JSX.Element => {
     const { current, origin, originNav } = props;
     const navigate = useNavigate();
 

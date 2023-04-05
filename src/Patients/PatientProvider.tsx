@@ -137,7 +137,7 @@ type PatientProviderProps = {
     children: React.ReactNode;
 }
 
-const PatientProvider = ({ children }: PatientProviderProps): React.ReactElement => {
+const PatientProvider = ({ children }: PatientProviderProps): JSX.Element => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (

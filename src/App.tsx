@@ -13,7 +13,7 @@ import Routes from '@/Routes';
 import { theme } from '@/theme';
 import Viewport from '@/Viewport';
 
-const App = (): React.ReactElement => {
+const App = (): JSX.Element => {
 
   return (
     <React.StrictMode>

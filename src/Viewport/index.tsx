@@ -11,7 +11,7 @@ type ViewportProps = {
     children: React.ReactNode;
 }
 
-const Viewport = ({ children }: ViewportProps): React.ReactElement => {
+const Viewport = ({ children }: ViewportProps): JSX.Element => {
 
     return (
         <>

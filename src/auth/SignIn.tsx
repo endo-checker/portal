@@ -16,10 +16,9 @@ type Values = {
     [key: string]: string;
 }
 
-const SignIn = (): React.ReactElement => {
+const SignIn = (): JSX.Element => {
     const { signIn } = useUser();
     const navigate = useNavigate();
-    const alwaysOpen = true;
 
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -28,7 +27,7 @@ const SignIn = (): React.ReactElement => {
         password: ""
     });
 
-    const undefinedVals = Object.values(credentials).filter(val => val === '');
+    const undefinedVals: Array<string> = Object.values(credentials).filter(val => val === '')
     const disable = (): boolean => undefinedVals.length > 0;
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -62,7 +61,7 @@ const SignIn = (): React.ReactElement => {
     }
 
     return (
-        <Dialog open={alwaysOpen} maxWidth="sm" >
+        <Dialog open={true} maxWidth="sm" >
             <Stack sx={{ p: 2, width: 350 }} spacing={2} direction="column" alignItems="center">
                 <Logo sx={{ height: 100, width: 'auto' }} />
                 <Typography variant="h3">Sign In</Typography>

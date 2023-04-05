@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const SignUpSuccess = (): React.ReactElement => {
+const SignUpSuccess = (): JSX.Element => {
     const { successId } = useParams();
     const navigate = useNavigate();
 

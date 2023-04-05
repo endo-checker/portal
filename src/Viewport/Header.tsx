@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/auth/userContext';
 import Logo from '@/components/Logo';
 
-export const Header = (): React.ReactElement => {
+export const Header = (): JSX.Element => {
     const navigate = useNavigate();
     const { state, signOut } = useUser();
 

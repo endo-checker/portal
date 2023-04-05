@@ -13,7 +13,7 @@ type RiskType = {
     }
 }
 
-const RiskChip = (props: RiskChipProps): React.ReactElement => {
+const RiskChip = (props: RiskChipProps): JSX.Element => {
     const { risk } = props;
 
 

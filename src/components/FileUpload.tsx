@@ -11,7 +11,7 @@ type FileUploadProps = {
     variant?: 'text' | 'outlined' | 'contained';
 }
 
-const FileUpload = (props: FileUploadProps): React.ReactElement => {
+const FileUpload = (props: FileUploadProps): JSX.Element => {
     const { accept, onChange, title, variant } = props;
 
     return (

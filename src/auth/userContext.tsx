@@ -144,7 +144,7 @@ type AuthProviderProps = {
     children: React.ReactNode;
 }
 
-const AuthProvider = (props: AuthProviderProps) => {
+const AuthProvider = (props: AuthProviderProps): JSX.Element => {
     const { children } = props;
     const [state, dispatch] = useReducer(reducer, init);
 

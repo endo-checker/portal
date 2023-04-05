@@ -18,7 +18,7 @@ import Time from '@/components/Time';
 import { usePatientList } from '@/Patients/usePatientList';
 import type { PatientEntry } from '@/types';
 
-const Patients = (): React.ReactElement => {
+const Patients = (): JSX.Element => {
     const { state, queryPatients } = usePatientList();
     const [query, setQuery] = useState({ searchText: "", page: 0 });
     const navigate = useNavigate();

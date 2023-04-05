@@ -18,7 +18,7 @@ type EventTag = {
     }
 }
 
-const SearchBar = (props: SearchBarProps): React.ReactElement => {
+const SearchBar = (props: SearchBarProps): JSX.Element => {
     const { value, onChange } = props;
 
     const [term, setTerm] = useState(value || "");

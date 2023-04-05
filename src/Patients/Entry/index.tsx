@@ -12,7 +12,7 @@ import RiskChip from '@/components/RiskChip';
 import Trail from "@/components/Trail";
 import { usePatient } from "@/Patients/PatientProvider";
 
-const PatientEntry = (): React.ReactElement => {
+const PatientEntry = (): JSX.Element => {
     const { id } = useParams();
     const { state, getPatient } = usePatient();
     const initRef = useRef(null as string | null);

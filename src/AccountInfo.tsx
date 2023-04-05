@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 
 import { useUser } from '@/auth/userContext';
 
-const AccountInfo = (): React.ReactElement => {
+const AccountInfo = (): JSX.Element => {
     const { state } = useUser();
 
     return (

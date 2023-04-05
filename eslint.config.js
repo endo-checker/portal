@@ -8,7 +8,8 @@ import globals from 'globals';
 
 // To use eslint flat config:
 //   1. Set "type": "module" in package.json
-//   2. Check 'Experimental: Use Flat Config' in VSCode settings
+//   2. In ESLint plugin, ensure you are using the Pre-Release version
+//   3. Check 'Experimental: Use Flat Config' in VSCode settings
 
 export default [
     "eslint:recommended",
@@ -29,6 +30,7 @@ export default [
                 // project: 'tsconfig.json',
             },
             globals: {
+                JSX: 'readonly',
                 ...globals.browser,
             },
         },
@@ -42,27 +44,27 @@ export default [
             // "camelcase": ["error"],
             "prefer-template": "error",
             "prefer-const": "error",
-            "eqeqeq": ["error", "smart"],
+            eqeqeq: ["error", "smart"],
             "import/order": [
                 "warn",
                 {
-                    "groups": [
+                    groups: [
                         "builtin",
                         "external",
                         "internal"
                     ],
-                    "pathGroups": [
+                    pathGroups: [
                         {
                             "pattern": "react",
                             "group": "external",
                             "position": "before"
                         }
                     ],
-                    "pathGroupsExcludedImportTypes": [
+                    pathGroupsExcludedImportTypes: [
                         "react"
                     ],
                     "newlines-between": "always",
-                    "alphabetize": {
+                    alphabetize: {
                         "order": "asc",
                         "caseInsensitive": true
                     }
@@ -71,7 +73,7 @@ export default [
             "no-restricted-imports": [
                 "error",
                 {
-                    "patterns": ["@mui/*/*/*", "!@mui/material/test-utils/*"]
+                    patterns: ["@mui/*/*/*", "!@mui/material/test-utils/*"]
                 }
             ]
         }

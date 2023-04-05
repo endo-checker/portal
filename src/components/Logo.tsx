@@ -7,7 +7,7 @@ type LogoProps = {
     sx?: SxProps;
 }
 
-const Logo = (props: LogoProps): React.ReactElement => {
+const Logo = (props: LogoProps): JSX.Element => {
     return (
         <SvgIcon {...props} viewBox="0 0 136.08 229.28">
             <g id="BaKi31.tif">

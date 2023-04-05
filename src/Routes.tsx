@@ -15,10 +15,10 @@ const SignUpSuccess = lazy(() => import('@/auth/SignUpSuccess'));
 
 type RouteTypes = Array<{
     path: string;
-    element: React.ReactElement;
+    element: JSX.Element
 }>
 
-const Routes: React.FC = (): React.ReactElement | null => {
+const Routes: React.FC = (): JSX.Element | null => {
     const { state } = useUser();
 
     const loggedOutRoutes: RouteTypes = [
