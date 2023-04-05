@@ -1,38 +1,39 @@
 export const typography: object = {
     h1: {
         fontSize: '2.5rem',
-        fontWeight: 400,
+        fontWeight: 'normal',
     },
     h2: {
         fontSize: '2.25rem',
-        fontWeight: 500,
+        fontWeight: 'medium',
     },
     h3: {
         fontSize: '2rem',
-        fontWeight: 700,
+        fontWeight: 'bold',
     },
     h4: {
         fontSize: '1.75rem',
-        fontWeight: 400,
+        fontWeight: 'normal',
     },
     h5: {
         fontSize: '1.5rem',
-        fontWeight: 500,
+        fontWeight: 'medium',
     },
     h6: {
         fontSize: '1.25rem',
-        fontWeight: 700,
+        fontWeight: 'bold',
     },
     button: {
-        // fontWeight: 600,
-        // fontSize: '0.875rem',
-        // letterSpacing: '0.014em',
-        textTransform: 'none'
+        fontWeight: 'medium',
+        fontSize: '0.875rem',
+        letterSpacing: '0.017em',
+        textTransform: 'none',
+        lineHeight: 1.2,
     },
     caption: {
-        fontWeight: 400,
+        fontWeight: 'normal',
         fontSize: '0.75rem',
-        lineHeight: 1.07,
+        lineHeight: 1.2,
         letterSpacing: '0.017em',
     },
 };

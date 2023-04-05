@@ -14,27 +14,27 @@ import { theme } from '@/theme';
 import Viewport from '@/Viewport';
 
 const App = (): React.ReactElement => {
-  const client = new QueryClient();
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <QueryClientProvider client={client} >
-          <AuthProvider>
-            <PatientProvider>
-              <Viewport  >
-                <Suspense fallback={<Outline />}>
-                  <Routes />
-                </Suspense>
-              </Viewport>
-            </PatientProvider>
-          </AuthProvider>
-        </QueryClientProvider>
-      </BrowserRouter>
-    </ThemeProvider>
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <QueryClientProvider client={new QueryClient()} >
+            <AuthProvider>
+              <PatientProvider>
+                <Viewport  >
+                  <Suspense fallback={<Outline />}>
+                    <Routes />
+                  </Suspense>
+                </Viewport>
+              </PatientProvider>
+            </AuthProvider>
+          </QueryClientProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </React.StrictMode>
   )
 }
 
-export default App
-
+export default App; 

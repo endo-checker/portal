@@ -22,6 +22,7 @@ const SignUp = (): React.ReactElement => {
     const { signUp } = useUser();
     const navigate = useNavigate();
 
+    const [error, setError] = useState<string | null>(null);
     const [values, setValues] = useState<Values>({
         givenName: '',
         familyName: '',
@@ -30,9 +31,16 @@ const SignUp = (): React.ReactElement => {
         password: ''
     });
 
-    const onEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.key === 'Enter' && { ...values }) {
-            signUp(values);
+    const undefinedVals = Object.values(values).filter(val => val === '');
+    const disable = (): boolean => undefinedVals.length > 0;
+
+    const onEnter = (e: React.KeyboardEvent<HTMLDivElement>): void => {
+        if (e.key === 'Enter') {
+            if (undefinedVals.length > 0) {
+                setError("Please enter your details");
+            } else {
+                signUp(values);
+            }
         }
     }
 
@@ -51,6 +59,7 @@ const SignUp = (): React.ReactElement => {
                     <Stack spacing={2} alignItems="center" direction="column">
                         <Logo sx={{ height: 100, width: 'auto' }} />
                         <Typography variant="h3">Sign Up</Typography>
+                        {error && <Typography color="error">{error}</Typography>}
                     </Stack>
                 </Grid>
                 <Grid xs={6}>
@@ -70,7 +79,7 @@ const SignUp = (): React.ReactElement => {
                 </Grid>
 
                 <Grid xs={12}>
-                    <Button size="large" fullWidth variant="contained" onClick={() => signUp(values)} >Create Account</Button>
+                    <Button disabled={disable()} size="large" fullWidth variant="contained" onClick={() => signUp(values)} >Create Account</Button>
                 </Grid>
                 <Grid xs={12}>
                     <Divider sx={{ width: '100%' }} />

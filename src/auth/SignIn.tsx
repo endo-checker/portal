@@ -28,6 +28,9 @@ const SignIn = (): React.ReactElement => {
         password: ""
     });
 
+    const undefinedVals = Object.values(credentials).filter(val => val === '');
+    const disable = (): boolean => undefinedVals.length > 0;
+
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
         setCredentials({
@@ -67,7 +70,7 @@ const SignIn = (): React.ReactElement => {
                 <Typography align="center" color="grayText" >Log in to the Endo platform to access your patients and their information.</Typography>
                 <TextField onKeyDown={(e) => onEnter(e)} fullWidth label="Email" name="username" onChange={onChange} />
                 <TextField onKeyDown={(e) => onEnter(e)} type="password" fullWidth name="password" label="Password" onChange={onChange} />
-                <LoadingButton disabled={submitting} size="large" fullWidth onClick={() => awaitSignIn()} variant="contained">Sign In</LoadingButton>
+                <LoadingButton disabled={submitting ? submitting : disable()} size="large" fullWidth onClick={() => awaitSignIn()} variant="contained">Sign In</LoadingButton>
                 <Divider sx={{ width: '100%' }} />
                 <Stack direction="row" alignItems="center" spacing={1} >
                     <Typography align="center" color="grayText" >{"Don't have an account? "}</Typography>
