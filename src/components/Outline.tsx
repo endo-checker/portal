@@ -3,6 +3,7 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton';
 
+// Used for loading screens
 const Outline = (): React.ReactElement => {
     return (
         <Container maxWidth="lg" sx={{ py: 4, mt: 10 }}>
@@ -15,6 +16,7 @@ const Outline = (): React.ReactElement => {
 
 export default Outline
 
+// used for waiting for data to load
 export const ListSkeleton = (): React.ReactElement => {
     return (
         <Skeleton variant='text' width="100%" height={52} />

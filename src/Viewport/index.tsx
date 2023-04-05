@@ -3,20 +3,15 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-
 import Footer from './Footer';
 import Header from './Header';
 
 
 type ViewportProps = {
     children: React.ReactNode;
-
 }
 
 const Viewport = ({ children }: ViewportProps): React.ReactElement => {
-   
-
-
 
     return (
         <>

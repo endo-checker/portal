@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { LoadingButton } from "@mui/lab";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Divider from "@mui/material/Divider";
@@ -18,13 +19,16 @@ type Values = {
 const SignIn = (): React.ReactElement => {
     const { signIn } = useUser();
     const navigate = useNavigate();
+    const alwaysOpen = true;
 
+    const [submitting, setSubmitting] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
     const [credentials, setCredentials] = useState<Values>({
         username: "",
         password: ""
     });
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
         setCredentials({
             ...credentials,
@@ -32,21 +36,38 @@ const SignIn = (): React.ReactElement => {
         })
     }
 
-    const onEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.key === 'Enter' && { ...credentials }) {
-            signIn(credentials);
+    const onEnter = (e: React.KeyboardEvent<HTMLDivElement>): void => {
+        if (e.key === 'Enter') {
+            if (!credentials.username || !credentials.password) {
+                setError("Please enter your username and password");
+            }
+            else (
+                signIn(credentials)
+            )
+        }
+    }
+
+    const awaitSignIn = async (): Promise<void> => {
+        setSubmitting(true);
+        try {
+            await signIn(credentials);
+
+        } catch (e) {
+            setSubmitting(false)
+            console.log(e);
         }
     }
 
     return (
-        <Dialog open={true} maxWidth="sm" >
+        <Dialog open={alwaysOpen} maxWidth="sm" >
             <Stack sx={{ p: 2, width: 350 }} spacing={2} direction="column" alignItems="center">
                 <Logo sx={{ height: 100, width: 'auto' }} />
                 <Typography variant="h3">Sign In</Typography>
+                {error && <Typography color="error" >{error}</Typography>}
                 <Typography align="center" color="grayText" >Log in to the Endo platform to access your patients and their information.</Typography>
                 <TextField onKeyDown={(e) => onEnter(e)} fullWidth label="Email" name="username" onChange={onChange} />
                 <TextField onKeyDown={(e) => onEnter(e)} type="password" fullWidth name="password" label="Password" onChange={onChange} />
-                <Button size="large" fullWidth onClick={() => signIn(credentials)} variant="contained">Sign In</Button>
+                <LoadingButton disabled={submitting} size="large" fullWidth onClick={() => awaitSignIn()} variant="contained">Sign In</LoadingButton>
                 <Divider sx={{ width: '100%' }} />
                 <Stack direction="row" alignItems="center" spacing={1} >
                     <Typography align="center" color="grayText" >{"Don't have an account? "}</Typography>

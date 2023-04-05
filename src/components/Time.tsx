@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 type DateType = {
     date: number;
@@ -7,10 +7,10 @@ type DateType = {
 // converts epoch to 'time ago' format
 const Time = ({ date }: DateType): React.ReactElement => {
     const now = new Date();
-    const dateParser = new Date(date * 1000);
+    const elapsedTime = now.getTime() - date * 1000;
 
     return (
-        <>{timeFunc((now as unknown as number) - Date.parse(dateParser as unknown as string))}</>
+        <>{timeFunc(elapsedTime)}</>
     )
 }
 
@@ -33,18 +33,18 @@ const timeFunc = (elapsed: number): string => {
 
     else if (elapsed < msPerHour) {
         if (Math.round(elapsed / msPerMinute) > 1) {
-            return `${Math.round(elapsed / msPerMinute)} minutes ago`;
+            return `About ${Math.round(elapsed / msPerMinute)} minutes ago`;
         } else {
-            return `${Math.round(elapsed / msPerMinute)} minute ago`;
+            return `About ${Math.round(elapsed / msPerMinute)} minute ago`;
         }
     }
 
     else if (elapsed < msPerDay) {
         if (Math.round(elapsed / msPerHour) > 1) {
-            return `${Math.round(elapsed / msPerHour)} hours ago`;
+            return `About ${Math.round(elapsed / msPerHour)} hours ago`;
         }
         else {
-            return `${Math.round(elapsed / msPerHour)} hour ago`;
+            return `About ${Math.round(elapsed / msPerHour)} hour ago`;
         }
     }
 

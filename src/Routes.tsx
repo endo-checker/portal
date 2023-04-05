@@ -13,17 +13,22 @@ const SignIn = lazy(() => import('@/auth/SignIn'));
 const DefaultView = lazy(() => import('@/DefaultView'));
 const SignUpSuccess = lazy(() => import('@/auth/SignUpSuccess'));
 
-const Routes = () => {
+type RouteTypes = Array<{
+    path: string;
+    element: React.ReactElement;
+}>
+
+const Routes: React.FC = (): React.ReactElement | null => {
     const { state } = useUser();
 
-    const loggedOutRoutes = [
+    const loggedOutRoutes: RouteTypes = [
         { path: '/', element: <DefaultView /> },
-        { path: 'login', element: <SignIn /> },
-        { path: 'sign-up', element: <SignUp /> },
+        { path: '/login', element: <SignIn /> },
+        { path: '/sign-up', element: <SignUp /> },
         { path: '*', element: <NotFound /> },
         { path: '/success/:successId', element: <SignUpSuccess /> }
     ]
-    const routes = [
+    const routes: RouteTypes = [
         { path: '/', element: <Patients /> },
         { path: '/patient/:id', element: <PatientEntry /> },
         { path: '*', element: <NotFound /> },

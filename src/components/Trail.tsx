@@ -5,18 +5,20 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 
+type Keys = "originNav" | "origin" | "current";
 type TrailProps = {
-    [key: string]: string;
+    [key in Keys]: string;
 }
 
+// Creates a trail of breadcrumbs for the current page
 export const Trail = (props: TrailProps): React.ReactElement => {
     const { current, origin, originNav } = props;
     const navigate = useNavigate();
 
-    const seperator = "\u203a"
+    const separator = "\u203a"
 
     return (
-        <Breadcrumbs sx={{ display: { xs: 'none', sm: 'flex' } }} separator={seperator} >
+        <Breadcrumbs sx={{ display: { xs: 'none', sm: 'flex' } }} separator={separator} >
             <Link
                 sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
                 underline="hover"

@@ -36,7 +36,7 @@ const PatientEntry = (): React.ReactElement => {
             {state.loading && !state.patient && <Outline />}
             {state.patient &&
                 <>
-                    <Trail origin="Patient List" current={`${state.patient.givenNames} ${state.patient.familyName}`} />
+                    <Trail originNav="" origin="Patient List" current={`${state.patient.givenNames} ${state.patient.familyName}`} />
                     <Card>
                         <CardHeader
                             avatar={

@@ -13,6 +13,7 @@ import { useUser } from '@/auth/userContext';
 import Logo from "@/components/Logo";
 
 type Vals = 'givenName' | 'familyName' | 'email' | 'nickname' | 'password';
+
 type Values = {
     [key in Vals]: string;
 }
