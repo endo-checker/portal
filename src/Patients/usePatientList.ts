@@ -19,7 +19,12 @@ type Body = {
     limit?: number;
 }
 
-const setInit = (state: State) => {
+type UsePatientList = {
+    state: State;
+    queryPatients: (searchText: Body, limit?: number) => Promise<State | undefined>;
+}
+
+const setInit = (state: State): State => {
     return {
         ...state,
         patients: cloneDeep(state.patients),
@@ -27,7 +32,7 @@ const setInit = (state: State) => {
     };
 };
 
-const setError = (state: State, error: null) => {
+const setError = (state: State, error: null): State => {
     return {
         ...state,
         patients: cloneDeep(state.patients),
@@ -36,7 +41,7 @@ const setError = (state: State, error: null) => {
     };
 };
 
-export const usePatientList = () => {
+export const usePatientList = (): UsePatientList => {
     const [state, setState] = useState<State>({
         patients: [],
         error: null,
@@ -44,12 +49,10 @@ export const usePatientList = () => {
         total: 0,
     });
 
-    const queryPatients = async (searchText: Body, limit = 20) => {
+    const queryPatients = async (searchText: Body, limit = 20): Promise<State | undefined> => {
         setState(setInit(state));
 
-        const url = `${serviceEndpoint}`;
-
-        const data = await fetchJSON({ url, body: { limit, ...searchText } });
+        const data = await fetchJSON({ url: serviceEndpoint, body: { limit, ...searchText } });
         if (data.error) {
             console.error(data.error);
             setState(setError(state, data.error));
