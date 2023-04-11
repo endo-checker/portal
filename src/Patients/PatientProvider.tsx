@@ -18,7 +18,16 @@ type Action = {
     payload: any;
 }
 
-const initialState = {
+type PatientContext<T> = {
+    state: State;
+    getPatient: (id: string) => Promise<T>;
+    createPatient: (patient: PatientEntry) => Promise<T>;
+    updatePatient: (patient: PatientEntry) => Promise<T>;
+    deletePatient: (id: string) => Promise<T>;
+    clearState: () => T;
+}
+
+const initialState: State = {
     patient: null,
     loading: false,
     error: null
@@ -74,14 +83,14 @@ const reducer = (state: State, action: Action): State => {
     }
 };
 
-export const usePatient = () => {
+export const usePatient = (): PatientContext<void> => {
     const context = useContext(patientContext);
     if (!context) {
         throw new Error('usePatient must be used within an patientProvider');
     }
     const { state, dispatch } = context;
 
-    const clearState = () => {
+    const clearState = (): void => {
         dispatch({ type: 'clear' });
     };
 

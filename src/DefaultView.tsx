@@ -20,7 +20,6 @@ const DefaultView = (): JSX.Element => {
                     Sign in to access your account.
                 </Typography>
                 <Stack justifyContent="center" direction="row" spacing={2} sx={{ mb: 4 }}>
-
                     <Button size="large" aria-label="sign-up-button" onClick={() => navigate("/sign-up")}>
                         Sign Up
                     </Button>

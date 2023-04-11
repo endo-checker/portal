@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 
-
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
