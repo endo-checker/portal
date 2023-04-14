@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 
-import { useRoutes } from 'react-router-dom';
+import { useRoutes, RouteObject } from 'react-router-dom';
 
 import { useUser } from '@/auth/userContext';
 import Outline from '@/components/Outline';
@@ -14,19 +14,16 @@ const SignIn = lazy(() => import('@/auth/SignIn'));
 const DefaultView = lazy(() => import('@/DefaultView'));
 const SignUpSuccess = lazy(() => import('@/auth/SignUpSuccess'));
 
-type RouteTypes = Array<{
-    path: string;
-    element: JSX.Element
-}>
 
-const loggedOutRoutes: RouteTypes = [
+
+const loggedOutRoutes: Array<RouteObject> = [
     { path: '/', element: <DefaultView /> },
     { path: '/login', element: <SignIn /> },
     { path: '/sign-up', element: <SignUp /> },
     { path: '*', element: <NotFound /> },
     { path: '/success/:successId', element: <SignUpSuccess /> }
 ]
-const routes: RouteTypes = [
+const routes: Array<RouteObject> = [
     { path: '/', element: <Patients /> },
     { path: '/patient/:id', element: <PatientEntry /> },
     { path: '*', element: <NotFound /> },
@@ -36,7 +33,7 @@ const routes: RouteTypes = [
 const Routes: React.FC = () => {
     const { state } = useUser();
 
-    const authRoutes = (): RouteTypes => {
+    const authRoutes = (): Array<RouteObject> => {
         if (state.loading) {
             Outline
         }
